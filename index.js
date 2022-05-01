@@ -34,7 +34,7 @@ try {
     console.log('fileContent', fileContent);
   };
 
-  callAllFile(inputDir);
+  callAllFile(inputDir, convertMarkdown);
 
   core.setOutput("output_dir", time);
 
