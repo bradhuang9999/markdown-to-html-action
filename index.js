@@ -20,6 +20,10 @@ try {
   var absoluteInputDir = path.resolve(inputDir);
   var absoluteOutputDir = path.resolve(outputDir);
 
+  if(!fs.existsSync(absoluteOutputDir)) {
+    absoluteOutputDir = fs.mkdirSync(absoluteOutputDir, {recursive:true});
+  }
+
   const md = new MarkdownIt();
 
   const callAllFile = function(startPath, relatePath, func) {
