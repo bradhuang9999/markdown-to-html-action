@@ -32,8 +32,8 @@ jobs:
       - name: Commit html
         run: |
           git config remote.origin.url https://github.com/bradhuang9999/markdown-to-html-action.git
-          git config user.name "$(git log -n 1 --pretty=format:%an)"
-          git config user.email "$(git log -n 1 --pretty=format:%ae)"
+          git config user.name "bradhuang9999"
+          git config user.email "brad.huang9999@gmail.com"
           git add -A
           git commit -am "Automated html"
           git push
