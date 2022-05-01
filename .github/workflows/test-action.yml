@@ -13,18 +13,20 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          who-to-greet: 'Mona the Octocat'
           input_dir: './md'
           output_dir: './html'
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
-      - name: List files in the output folder
-        run: |
-          ls -lR ${{ github.workspace }}
       - name: List files in the md folder
         run: |
           ls -lR ${{ github.workspace }}/md
       - name: List files in the html folder
         run: |
           ls -lR ${{ github.workspace }}/html
+      - name: Commit html
+        run: |
+          git config user.name "$(git log -n 1 --pretty=format:%an)"
+          git config user.email "$(git log -n 1 --pretty=format:%ae)"
+          git commit -am "Automated html"
+          git push

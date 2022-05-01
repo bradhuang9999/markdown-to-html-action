@@ -5,11 +5,6 @@ var path = require("path");
 const MarkdownIt = require('markdown-it');
 
 try {
-  // `who-to-greet` input defined in action metadata file
-  const nameToGreet = core.getInput('who-to-greet');
-  console.log(`Hello ${nameToGreet}!`);
-  const time = (new Date()).toTimeString();
-  core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   //console.log(`The event payload: ${payload}`);
@@ -63,12 +58,7 @@ try {
   };
 
   callAllFile(absoluteInputDir, "/", convertMarkdown);
-
-  core.setOutput("output_dir", time);
-
-  //md = new MarkdownIt();
-  //var result = md.render('# markdown-it rulezz!');
-
-} catch (error) {
-  core.setFailed(error.message);
+} catch (err) {
+  console.error(err);
+  core.setFailed(err.message);
 }
