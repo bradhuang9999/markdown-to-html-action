@@ -29,6 +29,7 @@ try {
   };
 
   const convertMarkdown = function(filePath) {
+    console.log('filePath', filePath);
     const buffer = fs.readFileSync(filePath);
     const fileContent = buffer.toString();
     console.log('fileContent', fileContent);
