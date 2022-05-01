@@ -55,7 +55,7 @@ try {
 
     console.log('filePathNew', filePathNew);
 
-    fs.writeFile(filePathNew, resultHtml);
+    fs.writeFileSync(filePathNew, resultHtml, {encoding:'UTF-8'});
   };
 
   callAllFile(absoluteInputDir, "/", convertMarkdown);
