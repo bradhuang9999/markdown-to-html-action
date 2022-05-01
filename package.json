@@ -1,0 +1,23 @@
+{
+  "name": "markdown-to-html-action",
+  "version": "1.0.0",
+  "description": "This action prints \"Hello World\" or \"Hello\" + the name of a person to greet to the log.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradhuang9999/markdown-to-html-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradhuang9999/markdown-to-html-action/issues"
+  },
+  "homepage": "https://github.com/bradhuang9999/markdown-to-html-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.7.0"
+  }
+}
