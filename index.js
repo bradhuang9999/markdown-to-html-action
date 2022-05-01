@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const fs = require("fs")
+const fs = require("fs");
+var path = require("path");
 const MarkdownIt = require('markdown-it');
 
 try {
@@ -16,28 +17,42 @@ try {
   const inputDir = core.getInput('input_dir');
   const outputDir = core.getInput('output_dir');
 
-  const callAllFile = function(dirPath, func) {
+  var absoluteInputDir = path.resolve(inputDir);
+  var absoluteOutputDir = path.resolve(outputDir);
+
+  const md = new MarkdownIt();
+
+  const callAllFile = function(startPath, relatePath, func) {
     console.log('dirPath', dirPath);
     files = fs.readdirSync(dirPath);    
     files.forEach(function(fileName) {
-      console.log('fileName', fileName);
-      if (fs.statSync(dirPath + "/" + fileName).isDirectory()) {
-        callAllFile(dirPath + "/" + fileName, func)
+      if (fs.statSync(startPath + "/" + relatePath + "/" + fileName).isDirectory()) {
+        callAllFile(startPath, relatePath + "/" + fileName, func)
       } else {
-        func(dirPath, fileName);
+        func(startPath, relatePath, fileName);
       }
     });
   };
 
-  const convertMarkdown = function(filePath, fileName) {
-    console.log('filePath', filePath);
-    console.log('fileName', fileName);
-    const buffer = fs.readFileSync(filePath + "/" + fileName);
+  const convertMarkdown = function(startPath, relatePath, fileName) {
+    fileName = fileName.trim();
+    if(fileName.endsWith('.md'))
+
+    console.log('filePath', startPath, filePath, fileName);
+    const buffer = fs.readFileSync(startPath + "/", filePath + "/" + fileName, {encoding:'UTF-8'});
     const fileContent = buffer.toString();
-    console.log('fileContent', fileContent);
+    var resultHtml = md.render(fileContent);
+
+    var extIndex = fileName.lastIndexOf('.');
+    var fileNameNew = fileName.substr(0, extIndex) + ".html";    
+    var filePathNew = absoluteOutputDir + "/" + relatePath + fileNameNew;
+
+    console.log('filePathNew', filePathNew);
+
+    //fs.writeFile(fileNameName, resultHtml, 'UTF-8');
   };
 
-  callAllFile(inputDir, convertMarkdown);
+  callAllFile(absoluteInputDir, "/", convertMarkdown);
 
   core.setOutput("output_dir", time);
 
