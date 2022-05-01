@@ -45,17 +45,17 @@ try {
     }
 
     console.log('filePath', startPath, relatePath, fileName);
-    const buffer = fs.readFileSync(startPath + "/" + relatePath + "/" + fileName, {encoding:'UTF-8'});
+    const buffer = fs.readFileSync(startPath + relatePath + "/" + fileName, {encoding:'UTF-8'});
     const fileContent = buffer.toString();
     var resultHtml = md.render(fileContent);
 
     var extIndex = fileName.lastIndexOf('.');
     var fileNameNew = fileName.substr(0, extIndex) + ".html";    
-    var filePathNew = absoluteOutputDir + "/" + relatePath + fileNameNew;
+    var filePathNew = absoluteOutputDir + relatePath + fileNameNew;
 
     console.log('filePathNew', filePathNew);
 
-    //fs.writeFile(fileNameName, resultHtml, 'UTF-8');
+    fs.writeFile(fileNameName, resultHtml, 'UTF-8');
   };
 
   callAllFile(absoluteInputDir, "/", convertMarkdown);

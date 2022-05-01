@@ -25,3 +25,6 @@ jobs:
       - name: List files in the md folder
         run: |
           ls -lR ${{ github.workspace }}/md
+      - name: List files in the html folder
+        run: |
+          ls -lR ${{ github.workspace }}/html
