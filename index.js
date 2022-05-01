@@ -17,11 +17,12 @@ try {
   const outputDir = core.getInput('output_dir');
 
   const callAllFile = function(dirPath, func) {
-    files = fs.readdirSync(dirPath);
-  
-    files.forEach(function(file) {
-      if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-        callAllFile(dirPath + "/" + file, func)
+    console.log('dirPath', dirPath);
+    files = fs.readdirSync(dirPath);    
+    files.forEach(function(fileName) {
+      console.log('fileName', fileName);
+      if (fs.statSync(dirPath + "/" + fileName).isDirectory()) {
+        callAllFile(dirPath + "/" + fileName, func)
       } else {
         func(dirPath);
       }
