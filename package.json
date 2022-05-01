@@ -19,6 +19,7 @@
   "homepage": "https://github.com/bradhuang9999/markdown-to-html-action#readme",
   "dependencies": {
     "@actions/core": "^1.7.0",
-    "@actions/github": "^5.0.1"
+    "@actions/github": "^5.0.1",
+    "markdown-it": "^13.0.0"
   }
 }

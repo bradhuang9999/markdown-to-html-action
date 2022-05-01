@@ -1,6 +1,12 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
+  input_dir: 
+    description: 'The location of the folder containing your .md or .markdown files.'
+    default: '/md'
+  output_dir: 
+    description: 'The location of the folder you want to place the built files.'
+    default: '/html'
   who-to-greet:  # id of input
     description: 'Who to greet'
     required: true
