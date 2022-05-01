@@ -36,10 +36,16 @@ try {
 
   const convertMarkdown = function(startPath, relatePath, fileName) {
     fileName = fileName.trim();
-    if(fileName.endsWith('.md'))
+    if(!fileName.endsWith('.md') && !fileName.endsWith('.markdown')) {
+        return;
+    }
+
+    if(relatePath=="") {
+        relatePath = "/";
+    }
 
     console.log('filePath', startPath, relatePath, fileName);
-    const buffer = fs.readFileSync(startPath + "/", relatePath + "/" + fileName, {encoding:'UTF-8'});
+    const buffer = fs.readFileSync(startPath + "/" + relatePath + "/" + fileName, {encoding:'UTF-8'});
     const fileContent = buffer.toString();
     var resultHtml = md.render(fileContent);
 
