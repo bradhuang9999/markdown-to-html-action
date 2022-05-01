@@ -24,9 +24,12 @@ jobs:
       - name: List files in the html folder
         run: |
           ls -lR ${{ github.workspace }}/html
+      - run: echo "$(git log -n 1 --pretty=format:%an)"
+      - run: echo "$(git log -n 1 --pretty=format:%ae)"
       - name: Commit html
         run: |
           git config user.name "$(git log -n 1 --pretty=format:%an)"
           git config user.email "$(git log -n 1 --pretty=format:%ae)"
+          git add -A
           git commit -am "Automated html"
           git push
