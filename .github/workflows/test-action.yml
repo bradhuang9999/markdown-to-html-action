@@ -19,6 +19,9 @@ jobs:
       # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
-      - name: List files in the repository
+      - name: List files in the output folder
         run: |
-          ls -lR ${{ github.workspace }}
+          ls -lR ${{ github.workspace }}\md
+      - name: List files in the md folder
+        run: |
+          ls -lR .\md

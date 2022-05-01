@@ -12,8 +12,10 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   console.log(`The event payload: ${payload}`);
 
-  const inputDir = core.getInput('input-dir');
-  const outputDir = core.getInput('output-dir');
+  const inputDir = core.getInput('input_dir');
+  const outputDir = core.getInput('output_dir');
+
+  core.setOutput("output_dir", time);
 
   //md = new MarkdownIt();
   //var result = md.render('# markdown-it rulezz!');
