@@ -38,8 +38,8 @@ try {
     fileName = fileName.trim();
     if(fileName.endsWith('.md'))
 
-    console.log('filePath', startPath, filePath, fileName);
-    const buffer = fs.readFileSync(startPath + "/", filePath + "/" + fileName, {encoding:'UTF-8'});
+    console.log('filePath', startPath, relatePath, fileName);
+    const buffer = fs.readFileSync(startPath + "/", relatePath + "/" + fileName, {encoding:'UTF-8'});
     const fileContent = buffer.toString();
     var resultHtml = md.render(fileContent);
 
