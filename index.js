@@ -23,8 +23,8 @@ try {
   const md = new MarkdownIt();
 
   const callAllFile = function(startPath, relatePath, func) {
-    console.log('relatePath', relatePath);
-    files = fs.readdirSync(dirPath);    
+    console.log('relatePath', relatePath);    
+    files = fs.readdirSync(startPath + "/" + relatePath);    
     files.forEach(function(fileName) {
       if (fs.statSync(startPath + "/" + relatePath + "/" + fileName).isDirectory()) {
         callAllFile(startPath, relatePath + "/" + fileName, func)
