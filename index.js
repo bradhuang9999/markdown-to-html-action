@@ -21,7 +21,7 @@ try {
   var absoluteOutputDir = path.resolve(outputDir);
 
   if(!fs.existsSync(absoluteOutputDir)) {
-    absoluteOutputDir = fs.mkdirSync(absoluteOutputDir, {recursive:true});
+    fs.mkdirSync(absoluteOutputDir, {recursive:true});
   }
 
   const md = new MarkdownIt();
@@ -44,10 +44,6 @@ try {
         return;
     }
 
-    if(relatePath=="") {
-        relatePath = "/";
-    }
-
     console.log('filePath', startPath, relatePath, fileName);
     const buffer = fs.readFileSync(startPath + relatePath + "/" + fileName, {encoding:'UTF-8'});
     const fileContent = buffer.toString();
@@ -55,11 +51,15 @@ try {
 
     var extIndex = fileName.lastIndexOf('.');
     var fileNameNew = fileName.substr(0, extIndex) + ".html";    
-    var filePathNew = absoluteOutputDir + relatePath + fileNameNew;
+    var filePathNew = absoluteOutputDir + relatePath;
 
     console.log('filePathNew', filePathNew);
 
-    fs.writeFileSync(filePathNew, resultHtml, {encoding:'UTF-8'});
+    if(!fs.existsSync(filePathNew)) {
+        fs.mkdirSync(filePathNew, {recursive:true});
+    }
+
+    fs.writeFileSync(filePathNew + "/" + fileNameNew, resultHtml, {encoding:'UTF-8'});
   };
 
   callAllFile(absoluteInputDir, "/", convertMarkdown);
