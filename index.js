@@ -24,14 +24,15 @@ try {
       if (fs.statSync(dirPath + "/" + fileName).isDirectory()) {
         callAllFile(dirPath + "/" + fileName, func)
       } else {
-        func(dirPath);
+        func(dirPath, fileName);
       }
     });
   };
 
-  const convertMarkdown = function(filePath) {
+  const convertMarkdown = function(filePath, fileName) {
     console.log('filePath', filePath);
-    const buffer = fs.readFileSync(filePath);
+    console.log('fileName', fileName);
+    const buffer = fs.readFileSync(filePath + "/" + fileName);
     const fileContent = buffer.toString();
     console.log('fileContent', fileContent);
   };
