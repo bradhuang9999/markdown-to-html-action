@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const MarkdownIt = require('markdown-it')
+const fs = require("fs")
+const MarkdownIt = require('markdown-it');
 
 try {
   // `who-to-greet` input defined in action metadata file
@@ -14,6 +15,26 @@ try {
 
   const inputDir = core.getInput('input_dir');
   const outputDir = core.getInput('output_dir');
+
+  const callAllFile = function(dirPath, func) {
+    files = fs.readdirSync(dirPath);
+  
+    files.forEach(function(file) {
+      if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+        callAllFile(dirPath + "/" + file, func)
+      } else {
+        func(dirPath);
+      }
+    });
+  };
+
+  const convertMarkdown = function(filePath) {
+    const buffer = fs.readFileSync(filePath);
+    const fileContent = buffer.toString();
+    console.log('fileContent', fileContent);
+  };
+
+  callAllFile(inputDir);
 
   core.setOutput("output_dir", time);
 
