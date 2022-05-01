@@ -27,10 +27,14 @@ jobs:
       - run: echo "$(git log -n 1 --pretty=format:%an)"
       - run: echo "$(git log -n 1 --pretty=format:%ae)"
       - run: echo "${{ secrets.GITHUB_TOKEN }}"
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      #- name: Deploy
+      #  uses: peaceiris/actions-gh-pages@v3
+      #  with:
+      #    github_token: ${{ secrets.GITHUB_TOKEN }}
+      #    publish_dir: ./html
+      #    publish_branch: gh-pages
+      #    allow_empty_commit: true
+      - name: Commit & Push changes
+        uses: actions-js/push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html
-          publish_branch: gh-pages
-          allow_empty_commit: true
