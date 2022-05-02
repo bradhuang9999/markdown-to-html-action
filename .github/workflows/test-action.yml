@@ -31,9 +31,15 @@ jobs:
       #    publish_dir: ./html
       #    publish_branch: gh-pages
       #    allow_empty_commit: true
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
+      #- name: Deploy
+      #  uses: JamesIves/github-pages-deploy-action@v4.3.3
+      #  with:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    branch: gh-pages # The branch the action should deploy to.
+      #    folder: ./html # The folder the action should deploy.
+      
+      - name: Push changes
+        if: steps.commit.outputs.push == 'true'
+        uses: ad-m/github-push-action@master
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          branch: gh-pages # The branch the action should deploy to.
-          folder: ./html # The folder the action should deploy.
+           github_token: ${{ secrets.GITHUB_TOKEN }}
