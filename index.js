@@ -23,15 +23,10 @@ try {
   if(strTemplatePath) {
     var strTemplate = fs.readFileSync(strTemplatePath, {encoding:'UTF-8'}).toString();  
   }
-  
-  
-  if(!fs.existsSync(absoluteOutputDir)) {
-    fs.mkdirSync(absoluteOutputDir, {recursive:true});
-  }
 
   Walker(absoluteInputDir)
-  .on('file', function (root, stat, next) {
-    var fileName = path.basename(file);
+  .on('file', function (file, stat) {
+      var fileName = path.basename(file);
       var dirName = path.dirname(file);
       var relatePath = dirName.substring(absoluteInputDir.length);
       
