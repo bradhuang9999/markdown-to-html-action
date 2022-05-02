@@ -1,9 +1,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require("fs");
-var path = require("path");
+const path = require("path");
 const Walker = require('walker');
-import { marked } from 'marked';
+const { marked } = require('marked');
 
 try {
   // Get the JSON webhook payload for the event that triggered the workflow
