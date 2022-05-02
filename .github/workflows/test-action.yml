@@ -41,8 +41,6 @@ jobs:
       - name: create and commit files
         id: commit
         run: |
-          rm index.html
-          echo "${{ steps.getreadme.outputs.readme }}" > index.html
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
           git add --all
