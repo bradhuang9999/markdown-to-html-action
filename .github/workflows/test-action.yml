@@ -16,8 +16,6 @@ jobs:
           input_dir: './md'
           output_dir: './html'
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
       - name: List files in the md folder
         run: |
           ls -lR ${{ github.workspace }}/md
@@ -38,19 +36,19 @@ jobs:
       #    branch: gh-pages # The branch the action should deploy to.
       #    folder: ./html # The folder the action should deploy.
      
-      - name: create and commit files
-        id: commit
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "github-actions"
-          git add --all
-          git commit -m "auto-build html" -a
-          echo "::set-output name=push::true"
-        shell: bash
-      
-      - name: Push changes
-        if: steps.commit.outputs.push == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
-           branch: ${{ github.ref }} 
+      #- name: create and commit files
+      #  id: commit
+      #  run: |
+      #    git config --local user.email "action@github.com"
+      #    git config --local user.name "github-actions"
+      #    git add --all
+      #    git commit -m "auto-build html" -a
+      #    echo "::set-output name=push::true"
+      #  shell: bash
+      #
+      #- name: Push changes
+      #  if: steps.commit.outputs.push == 'true'
+      #  uses: ad-m/github-push-action@master
+      #  with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     branch: ${{ github.ref }} 
