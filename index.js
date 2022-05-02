@@ -23,7 +23,7 @@ try {
   Walker(absoluteInputDir)
   .on('file', function (root, stat, next) {
     console.log(root, stat, next);
-    const fullpath = path.join(root, stat.name)
+    //const fullpath = path.join(root, stat.name)
   });
 } catch (err) {
   console.error(err);
