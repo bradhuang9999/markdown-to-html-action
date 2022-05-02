@@ -9,9 +9,8 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Hello world action step
+      - name: Compile Markdown to HTML
         uses: ./ # Uses an action in the root directory
-        id: hello
         with:
           input_dir: './md'
           output_dir: './html'
@@ -44,6 +43,13 @@ jobs:
           branch: gh-pages # The branch the action should deploy to.
           folder: ./md # The folder the action should deploy.
           target-folder: 'md'
+      - name: Deploy lib
+        uses: JamesIves/github-pages-deploy-action@v4.3.3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: ./lib # The folder the action should deploy.
+          target-folder: 'lib'
      
       #- name: create and commit files
       #  id: commit
