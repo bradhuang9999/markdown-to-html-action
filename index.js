@@ -2,7 +2,8 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require("fs");
 var path = require("path");
-const MarkdownIt = require('markdown-it');
+const Walker = require('walker');
+import { marked } from 'marked';
 
 try {
   // Get the JSON webhook payload for the event that triggered the workflow
@@ -20,9 +21,9 @@ try {
   }
 
   Walker(absoluteInputDir)
-  .on('file', function(file, stat) {
-    console.log('Got file: ' + file);
-    console.log('stat: ' + stat);
+  .on('file', function (root, stat, next) {
+    console.log(root, stat, next);
+    const fullpath = path.join(root, stat.name)
   });
 } catch (err) {
   console.error(err);
