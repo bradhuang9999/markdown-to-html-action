@@ -7,9 +7,8 @@ inputs:
   output_dir: 
     description: 'The location of the folder you want to place the built files.'
     default: '/html'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  template: 
+    description: 'The location of the mustache template for html.'
 runs:
   using: 'node16'
   main: 'index.js'

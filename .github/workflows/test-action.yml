@@ -3,7 +3,7 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Markdown to HTML
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -15,6 +15,7 @@ jobs:
         with:
           input_dir: './md'
           output_dir: './html'
+          template: './tmpl/contentPage.html'
       # Use the output from the `hello` step
       - name: List files in the md folder
         run: |
