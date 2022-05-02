@@ -37,6 +37,18 @@ jobs:
       #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #    branch: gh-pages # The branch the action should deploy to.
       #    folder: ./html # The folder the action should deploy.
+     
+      - name: create and commit files
+        id: commit
+        run: |
+          rm index.html
+          echo "${{ steps.getreadme.outputs.readme }}" > index.html
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git add --all
+          git commit -m "auto-build html" -a
+          echo "::set-output name=push::true"
+        shell: bash
       
       - name: Push changes
         if: steps.commit.outputs.push == 'true'
